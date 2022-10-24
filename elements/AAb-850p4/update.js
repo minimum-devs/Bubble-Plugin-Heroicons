@@ -23,4 +23,8 @@ function(instance, properties, context) {
       });
     }
   }
+    
+  if(properties.tooltip) {
+    root.setAttribute("title", properties.tooltip);
+  }
 }

@@ -12,7 +12,7 @@ function(instance, properties, context) {
   root.innerHTML = icon;
   let svg = root.firstChild;
   svg.setAttribute("stroke", properties.color);
-
+    
   if (properties.clickable) {
     root.style.cursor = "pointer";
     if (!instance.data.listener) {
@@ -23,5 +23,9 @@ function(instance, properties, context) {
         instance.triggerEvent("click");
       });
     }
+  }
+    
+  if(properties.tooltip) {
+    root.setAttribute("title", properties.tooltip);
   }
 }
