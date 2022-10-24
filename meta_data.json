@@ -1,0 +1,15 @@
+{
+    "categories": {
+        "0": "productivity",
+        "1": "ecommerce",
+        "2": "blog",
+        "3": "internationalization"
+    },
+    "demo_page": "https://minimum-studio.bubbleapps.io/heroicons",
+    "description": "Beautiful hand-crafted SVG icons by the makers of Tailwind CSS.\n\nThis plugin is a small wrapper that makes it easy & straightforward to use these fantastic icons in your bubble app!\n\nAdjust size and colors ✅\nSolid, Outline and Mini icon styles ✅\nChange background, borders and shadows ✅\nRespond to click events ✅\n\nCheck out the heroicons website to find the full set of supported icons & what they looks like!",
+    "image": "//s3.amazonaws.com/appforest_uf/f1622491076297x741941695009269200/heroicons.svg",
+    "license": "open_source",
+    "link": "https://minimum.studio/plugins",
+    "name": "Heroicons",
+    "plugin_instructions": "Check out the full plugin documentation at https://www.notion.so/minimumstudio/Heroicons-e523d90b20af4a8ea27110bea8d9eec3\n\n⚠️ Warning: Heroicons 1.6 are no longer supported. You must use Heroicons 2.0 names only. Check available icons here -> https://heroicons.com/"
+}

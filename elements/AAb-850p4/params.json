@@ -1,0 +1,66 @@
+{
+    "add_hover_pressed": true,
+    "add_is_visible": true,
+    "add_large_file_upload_properties": false,
+    "autobinding_value": "text",
+    "category": "visual elements",
+    "default_dim": {
+        "height": 20,
+        "width": 20
+    },
+    "display": "Mini Icon",
+    "events": {
+        "AAW": {
+            "caption": "clicked",
+            "doc": "What to do when the icon has been clicked.",
+            "name": "click"
+        }
+    },
+    "fields": {
+        "AAX": {
+            "caption": "Color",
+            "default_val": "rgba(51, 51, 51, 1)",
+            "doc": "The icon's stroke color.",
+            "editor": "Color",
+            "in_style": true,
+            "name": "color",
+            "rank": 1
+        },
+        "AAY": {
+            "caption": "Icon",
+            "default_val": "bug-ant",
+            "doc": "Which icon to render.",
+            "editor": "Dropdown",
+            "in_style": false,
+            "name": "icon",
+            "options": "arrow-small-down,bug-ant,language,inbox,shield-check,paint-brush,play-circle,eye-dropper,phone-arrow-up-right,circle-stack,forward,chat-bubble-oval-left-ellipsis,no-symbol,stop-circle,server-stack,magnifying-glass-circle,arrow-down-left,currency-pound,bars-arrow-up,chevron-down,calendar,clipboard-document-list,arrow-up-on-square,receipt-refund,currency-dollar,arrow-up-right,arrow-path-rounded-square,magnifying-glass,information-circle,swatch,cube,cube-transparent,puzzle-piece,flag,chart-pie,arrow-long-left,chat-bubble-bottom-center-text,code-bracket-square,arrow-small-left,minus,arrow-uturn-down,scale,check-badge,chat-bubble-left-right,calculator,folder,home-modern,bookmark-slash,globe-americas,bolt-slash,speaker-x-mark,at-symbol,clipboard-document,plus,gif,computer-desktop,arrow-path,gift,chevron-double-left,video-camera,stop,gift-top,currency-bangladeshi,arrow-down,megaphone,lock-closed,check,arrow-down-tray,clock,fire,arrow-up-circle,cursor-arrow-ripple,hand-thumb-up,arrow-left-circle,arrow-small-up,chevron-double-right,chat-bubble-bottom-center,pause,radio,variable,microphone,power,chart-bar-square,rectangle-stack,video-camera-slash,squares-plus,key,archive-box-x-mark,eye,wrench-screwdriver,paper-clip,bell-alert,arrow-uturn-left,inbox-stack,chevron-double-up,command-line,rocket-launch,signal-slash,chat-bubble-left-ellipsis,envelope,x-circle,shopping-bag,funnel,code-bracket,user-plus,chat-bubble-oval-left,arrow-trending-down,building-storefront,paper-airplane,arrow-up-tray,user-circle,cpu-chip,backspace,arrow-right-on-rectangle,ellipsis-vertical,arrow-small-right,user-group,arrow-uturn-right,chat-bubble-left,chevron-double-down,document-plus,x-mark,user-minus,star,arrow-up-on-square-stack,arrow-down-on-square,printer,building-library,book-open,heart,cog-6-tooth,share,battery-0,globe-alt,beaker,pencil,bell,server,question-mark-circle,arrow-left,eye-slash,currency-euro,adjustments-vertical,chevron-up,presentation-chart-bar,queue-list,cog-8-tooth,ellipsis-horizontal-circle,truck,folder-open,tag,sun,phone,phone-x-mark,table-cells,currency-rupee,chevron-up-down,square-3-stack-3d,newspaper,arrows-right-left,exclamation-circle,tv,globe-asia-australia,trophy,face-frown,clipboard-document-check,arrow-long-up,bookmark-square,hand-thumb-down,minus-small,bars-arrow-down,chevron-left,bookmark,building-office-2,cog,scissors,archive-box,musical-note,exclamation-triangle,bars-2,arrow-long-down,hand-raised,lifebuoy,device-tablet,plus-circle,trash,adjustments-horizontal,arrow-down-circle,cake,arrow-trending-up,wallet,play,speaker-wave,document-magnifying-glass,chart-bar,academic-cap,square-2-stack,cloud-arrow-down,finger-print,arrows-up-down,document-text,check-circle,window,link,folder-arrow-down,minus-circle,receipt-percent,currency-yen,document-check,document-chart-bar,cloud,bell-snooze,arrow-uturn-up,document-arrow-up,device-phone-mobile,phone-arrow-down-left,squares-2x2,hashtag,magnifying-glass-minus,bolt,camera,battery-100,play-pause,wrench,calendar-days,arrow-up-left,plus-small,list-bullet,map-pin,users,arrow-down-on-square-stack,view-columns,viewfinder-circle,arrows-pointing-in,inbox-arrow-down,rss,bars-4,pencil-square,envelope-open,arrows-pointing-out,bars-3-bottom-right,arrow-left-on-rectangle,home,chevron-right,bars-3,map,document-minus,backward,bars-3-center-left,arrow-up,ellipsis-horizontal,photo,briefcase,credit-card,document-duplicate,document-arrow-down,building-office,rectangle-group,face-smile,arrow-long-right,presentation-chart-line,lock-open,document,archive-box-arrow-down,bell-slash,signal,ticket,battery-50,clipboard,shield-exclamation,qr-code,arrow-right,globe-europe-africa,bars-3-bottom-left,pause-circle,wifi,moon,arrow-right-circle,cursor-arrow-rays,user,sparkles,banknotes,folder-plus,magnifying-glass-plus,shopping-cart,arrow-down-right,light-bulb,arrow-top-right-on-square,film,cloud-arrow-up,folder-minus,identification",
+            "rank": 0
+        },
+        "AAZ": {
+            "caption": "Clickable",
+            "default_val": false,
+            "doc": "Whether or not the icon should be clickable.",
+            "editor": "Checkbox",
+            "name": "clickable",
+            "rank": 2
+        },
+        "AAa": {
+            "caption": "Name",
+            "doc": "To pick an icon dynamically, specify the icon name.",
+            "editor": "DynamicValue",
+            "name": "name",
+            "optional": true,
+            "rank": 3,
+            "value": "text"
+        }
+    },
+    "icon": "ion-pizza",
+    "property_applications": {
+        "Background": true,
+        "Border": true,
+        "BoxShadow": true,
+        "Padding": true,
+        "resizable": true
+    },
+    "support_autobinding": false
+}

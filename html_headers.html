@@ -1,0 +1,144 @@
+<script defer src="//dd7tel2830j4w.cloudfront.net/f1665324917663x418126255478917100/heroicons.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let icons = window.heroicons_mini;
+  // original /\[hi[A-z]\](.*)\[\/hi[A-z]\]\
+
+  let allSelect = /\[(hi.*)\](.*)\[\/(hi.*)\]/;
+  let colormatch = /#[0-9A-f]{3,6}#/;
+  let fillMatcher = /fill="currentColor"/;
+
+  function replaceIcon(btn) {
+    let content = btn.innerHTML;
+    let iconColor = content.match(colormatch);
+    content = content.replace(colormatch, "");
+
+    const iconMarkup = content.match(allSelect);
+
+    if (!iconMarkup) return; // if there's no icon in this button, just return.
+
+    if (iconMarkup[1] != iconMarkup[3]) return; // return if both opening and closing tags do not match
+
+    const iconProps = iconMarkup[1].slice(2).split("-"); // remove hi and separate props by -
+
+    const props = {
+      name: iconMarkup[2],
+      size: undefined,
+      color: btn.innerHTML.match(colormatch)
+        ? btn.innerHTML.match(colormatch)[0].slice(0, -1)
+        : undefined,
+      set: "mini",
+      position: undefined,
+      iconHTML: undefined,
+      style: 'style="',
+    };
+
+    if (props.color) {
+      props.iconHTML = props.iconHTML.replace(fillMatcher, "fill=" + iconColor);
+    }
+
+    iconProps.forEach((property) => {
+      switch (property) {
+        case "l":
+          props.position = "left";
+          break;
+        case "r":
+          props.position = "right";
+          break;
+        case "b":
+          props.position = "center";
+          break;
+        case "o":
+          props.set = "outlined";
+          break;
+        case "s": //there's also 'm' but since it's default mini set, we wont add a case
+          props.set = "solid";
+          break;
+      }
+      const number = Number(property);
+      if (number && number > 0) {
+        props.size = String(number) + "px";
+      }
+    });
+
+    if (window[`heroicons_${props.set}`].has(props.name)) {
+      props.iconHTML = window[`heroicons_${props.set}`].get(props.name);
+    } else {
+      console.log("Did not find applicable heroicon!");
+      return;
+    }
+
+    btn.style.display = "inline-flex";
+    btn.style.alignItems = "center";
+    btn.style.verticalAlign = "middle";
+    btn.style.justifyContent = "center";
+
+    if (!props.size) {
+      // by default icon height is font height+2px
+      const fontHeight = btn.style.fontSize.replace("px", "");
+      props.size = String(parseInt(fontHeight) + 2) + "px";
+    }
+    props.style += `height: ` + props.size + `;`;
+
+    let insertBefore = props.iconHTML.lastIndexOf("viewBox"); // ???
+
+    // remove icon markup from button, to inject html later
+    btn.innerHTML = btn.innerHTML.replace(allSelect, "");
+
+    if (props.position == "left") {
+      let styledHTML =
+        props.iconHTML.substring(0, insertBefore) +
+        props.style +
+        `margin-right:8px"` +
+        props.iconHTML.substring(insertBefore);
+      btn.insertAdjacentHTML("afterbegin", styledHTML);
+    } else if (props.position == "right") {
+      let styledHTML =
+        props.iconHTML.substring(0, insertBefore) +
+        props.style +
+        `margin-left:8px"` +
+        props.iconHTML.substring(insertBefore);
+      btn.insertAdjacentHTML("beforeend", styledHTML);
+    } else {
+      let styledHTML =
+        props.iconHTML.substring(0, insertBefore) +
+        props.style +
+        `"` +
+        props.iconHTML.substring(insertBefore);
+      btn.insertAdjacentHTML("beforeend", styledHTML);
+    }
+  }
+
+  let config = {
+    attributes: true,
+    childList: true,
+    subtree: true,
+  };
+
+  let callback = function (mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      let el = mutation.target;
+      if (el.tagName === "BUTTON") {
+        replaceIcon(el);
+      }
+    }
+  };
+
+  const container = document.documentElement || document.body;
+  const observer = new MutationObserver(callback);
+  observer.observe(document, config);
+  observer.observe(container, config);
+
+  const buttons = Array.from(document.getElementsByTagName("button"));
+  if (buttons) {
+    buttons.forEach((element) => {
+      observer.observe(element, config);
+      replaceIcon(element);
+    });
+  }
+});
+
+
+
+</script>
