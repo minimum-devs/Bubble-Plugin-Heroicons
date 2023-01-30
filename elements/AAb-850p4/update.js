@@ -17,7 +17,9 @@ function(instance, properties, context) {
     if (!instance.data.listener) {
       instance.data.listener = true;
       root.addEventListener("click", (event) => {
-        event.stopPropagation();
+        if(properties.stop_propagation) {
+        	event.stopPropagation();
+        }
         root.setAttribute("listener", "true");
         instance.triggerEvent("click");
       });

@@ -7,12 +7,14 @@ function(instance, properties, context) {
   let svg = root.firstChild;
   svg.setAttribute("fill", properties.color);
 
-  if (properties.clickable) {
+  if (false && properties.clickable) {
     root.style.cursor = "pointer";
     if (!instance.data.listener) {
       instance.data.listener = true;
       root.addEventListener("click", (event) => {
-        event.stopPropagation();
+        if(properties.clickable) {
+          	event.stopPropagation();
+        }
         root.setAttribute("listener", "true");
         instance.triggerEvent("click");
       });
