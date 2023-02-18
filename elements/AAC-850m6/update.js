@@ -1,27 +1,29 @@
 function(instance, properties, context) {
+  let icons = instance.data.icons;
 
-  const icon = window.heroicons_solid.get(properties.name ?? properties.icon);
+  let icon;
+  if (properties.name) {
+    icon = icons.get(properties.name);
+  } else {
+    icon = icons.get(properties.icon);
+  }
 
   let root = instance.canvas.get(0);
   root.innerHTML = icon;
   let svg = root.firstChild;
   svg.setAttribute("fill", properties.color);
 
-  if (false && properties.clickable) {
+  $(root).off("mousedown");
+
+  if (properties.clickable) {
     root.style.cursor = "pointer";
-    if (!instance.data.listener) {
-      instance.data.listener = true;
-      root.addEventListener("click", (event) => {
-        if(properties.clickable) {
-          	event.stopPropagation();
-        }
-        root.setAttribute("listener", "true");
-        instance.triggerEvent("click");
-      });
-    }
+    root.addEventListener("click", instance.data.click);
+  } else {
+    root.style.cursor = "inherit";
+    root.removeEventListener("click", instance.data.click);
   }
-  
-  if(properties.tooltip) {
+
+  if (properties.tooltip) {
     root.setAttribute("title", properties.tooltip);
   }
 }

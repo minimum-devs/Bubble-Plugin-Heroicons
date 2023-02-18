@@ -2,15 +2,20 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    let icons = window.heroicons_mini;
-    // original /\[hi[A-z]\](.*)\[\/hi[A-z]\]\
-
     let allSelect = /\[(hi.*)\](.*)\[\/(hi.*)\]/;
     let colormatch = /#[0-9A-f]{3,6}#/;
     let fillMatcher = /fill="currentColor"/;
 
     function replaceIcon(btn) {
-      let content = btn.innerHTML;
+      const btn_nodes = Array.from(btn.childNodes);
+        
+      if (!btn_nodes) return;
+        
+      const text_node = btn_nodes.find((node) => node.nodeName === "#text");
+        
+      if (!text_node) return;
+      
+      let content = text_node.data;
       let iconColor = content.match(colormatch);
       content = content.replace(colormatch, "");
 
@@ -25,9 +30,7 @@
       const props = {
         name: iconMarkup[2],
         size: undefined,
-        color: btn.innerHTML.match(colormatch)
-          ? btn.innerHTML.match(colormatch)[0].slice(0, -1)
-          : undefined,
+        color: btn.innerHTML.match(colormatch) ? btn.innerHTML.match(colormatch)[0].slice(0, -1) : undefined,
         set: "mini",
         position: undefined,
         iconHTML: undefined,
@@ -52,17 +55,17 @@
           case "o":
             props.set = "outlined";
             break;
-          case "s": //there's also 'm' but since it's default mini set, we wont add a case
+          case "s":
             props.set = "solid";
             break;
         }
+          
         const number = Number(property);
+          
         if (number && number > 0) {
           props.size = String(number) + "px";
         }
       });
-
-
 
       if (window[`heroicons_${props.set}`].has(props.name)) {
         props.iconHTML = window[`heroicons_${props.set}`].get(props.name);
@@ -70,20 +73,26 @@
         console.log("Did not find applicable heroicon!");
         return;
       }
+        
+      btn.classList.add("heroicon");
+        
+      const default_size = "20px";
 
-      btn.style.display = "inline-flex";
-      btn.style.alignItems = "center";
-      btn.style.verticalAlign = "middle";
-      btn.style.justifyContent = "center";
-      
-      const default_size = '20px';
-      
       props.style += `height: ${props.size ?? default_size}; width: ${props.size ?? default_size};`;
 
-      let insertBefore = props.iconHTML.lastIndexOf("viewBox"); // ???
+      let insertBefore = props.iconHTML.lastIndexOf("viewBox");
 
-      // remove icon markup from button, to inject html later
-      btn.innerHTML = btn.innerHTML.replace(allSelect, "");
+      btn.childNodes.forEach((node) => {
+        if (node.nodeName === "#text") {
+          node.data = node.data.replace(allSelect, "");
+        }
+      });
+
+      btn.childNodes.forEach((node) => {
+        if (node.nodeName !== "#text") {
+          node.remove();
+        }
+      });
 
       if (props.position == "left") {
         let styledHTML =
@@ -101,41 +110,45 @@
         btn.insertAdjacentHTML("beforeend", styledHTML);
       } else {
         let styledHTML =
-          props.iconHTML.substring(0, insertBefore) +
-          props.style +
-          `"` +
-          props.iconHTML.substring(insertBefore);
+          props.iconHTML.substring(0, insertBefore) + props.style + `"` + props.iconHTML.substring(insertBefore);
         btn.insertAdjacentHTML("beforeend", styledHTML);
       }
     }
 
     let config = {
-      attributes: true,
-      childList: true,
       subtree: true,
+      childList: true,
+      attributes: false,
+      characterData: true,
     };
 
     let callback = function (mutationsList, observer) {
+
       for (let mutation of mutationsList) {
-        let el = mutation.target;
-        if (el.tagName === "BUTTON") {
-          replaceIcon(el);
+        if (mutation.target.tagName === "BUTTON") {
+          replaceIcon(mutation.target);
+        }
+
+        if (mutation.addedNodes) {
+          mutation.addedNodes.forEach((node) => {
+            if (node.tagName == "BUTTON") {
+              replaceIcon(node);
+            }
+          });
+        }
+
+        if (
+          mutation.target.nodeName === "#text" &&
+          mutation.target.parentElement &&
+          mutation.target.parentElement.tagName === "BUTTON"
+        ) {
+          replaceIcon(mutation.target.parentElement);
         }
       }
     };
 
-    const container = document.documentElement || document.body;
     const observer = new MutationObserver(callback);
     observer.observe(document, config);
-    observer.observe(container, config);
-
-    const buttons = Array.from(document.getElementsByTagName("button"));
-    if (buttons) {
-      buttons.forEach((element) => {
-        observer.observe(element, config);
-        replaceIcon(element);
-      });
-    }
   });
 </script>
 
@@ -157,5 +170,12 @@
     to {
       transform: rotate(360deg)
     }
+  }
+  
+  .heroicon {
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
   }
 </style>
