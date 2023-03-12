@@ -1,8 +1,8 @@
 {
     "assets": {
-        "AAj": {
-            "name": "icons",
-            "url": "//dd7tel2830j4w.cloudfront.net/f1666647470282x926765860833143300/heroicons.min.js"
+        "AAw": {
+            "name": "icons.js",
+            "url": "//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"
         }
     },
     "dependencies": {

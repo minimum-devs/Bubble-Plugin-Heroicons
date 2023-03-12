@@ -1,4 +1,4 @@
-<script defer src="//dd7tel2830j4w.cloudfront.net/f1666647470282x926765860833143300/heroicons.min.js"></script>
+<script defer src="//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"></script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -40,6 +40,7 @@
       if (props.color) {
         props.iconHTML = props.iconHTML.replace(fillMatcher, "fill=" + iconColor);
       }
+        
       iconProps.forEach((property) => {
         switch (property) {
           case "l":
@@ -73,7 +74,6 @@
         return;
       }
       
-
       btn.classList.add("heroicon");
         
       const default_size = "20px";
@@ -153,7 +153,7 @@
 </script>
 
 <style>
-  .animate-spin>circle {
+  .animate-spin > circle {
     color: inherit;
     opacity: 25%
   }
@@ -177,5 +177,25 @@
     vertical-align: middle;
     justify-content: center;
     align-items: center;
+  }
+    
+  .dots_one {
+    animation: dots 0.8s linear infinite;
+    animation-delay: -0.8s;
+  }
+
+  .dots_two {
+    animation-delay: -0.65s;
+  }
+
+  .dots_three {
+    animation-delay: -0.5s;
+  }
+
+  @keyframes dots {
+    93.75%,
+    100% {
+      opacity: 0.2;
+    }
   }
 </style>
