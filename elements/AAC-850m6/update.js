@@ -12,7 +12,7 @@ function(instance, properties, context) {
   root.innerHTML = icon;
   let svg = root.firstChild;
   svg.setAttribute("fill", properties.color);
-
+    
   $(root).off("mousedown");
 
   if (properties.clickable) {

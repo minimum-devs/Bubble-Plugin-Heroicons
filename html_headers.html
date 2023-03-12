@@ -12,15 +12,15 @@
       if (!btn_nodes) return;
         
       const text_node = btn_nodes.find((node) => node.nodeName === "#text");
-        
+      
       if (!text_node) return;
       
       let content = text_node.data;
       let iconColor = content.match(colormatch);
       content = content.replace(colormatch, "");
-
+      
       const iconMarkup = content.match(allSelect);
-
+      
       if (!iconMarkup) return; // if there's no icon in this button, just return.
 
       if (iconMarkup[1] != iconMarkup[3]) return; // return if both opening and closing tags do not match
@@ -40,7 +40,6 @@
       if (props.color) {
         props.iconHTML = props.iconHTML.replace(fillMatcher, "fill=" + iconColor);
       }
-
       iconProps.forEach((property) => {
         switch (property) {
           case "l":
@@ -73,7 +72,8 @@
         console.log("Did not find applicable heroicon!");
         return;
       }
-        
+      
+
       btn.classList.add("heroicon");
         
       const default_size = "20px";

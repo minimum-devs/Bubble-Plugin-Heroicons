@@ -12,6 +12,10 @@ function(instance, properties, context) {
   root.innerHTML = icon;
   let svg = root.firstChild;
   svg.setAttribute("stroke", properties.color);
+        
+  if(properties.stroke_width) {
+    svg.setAttribute("stroke-width", properties.stroke_width);
+  }  
 
   $(root).off("mousedown");
 
