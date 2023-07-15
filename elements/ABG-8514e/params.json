@@ -1,0 +1,52 @@
+{
+    "add_hover_pressed": true,
+    "add_is_visible": true,
+    "add_large_file_upload_properties": false,
+    "category": "visual elements",
+    "default_dim": {
+        "height": 24,
+        "width": 24
+    },
+    "display": "Spinner Icon",
+    "fields": {
+        "AAz": {
+            "caption": "Color",
+            "default_val": "rgba(51, 51, 51, 1)",
+            "doc": "The spinners color.",
+            "editor": "Color",
+            "in_style": true,
+            "name": "color",
+            "rank": 3
+        },
+        "ABA": {
+            "caption": "Icon",
+            "default_val": "bug-ant",
+            "doc": "Which spinner to render.",
+            "editor": "Dropdown",
+            "in_style": false,
+            "name": "icon",
+            "options": "spinner,spinner-alt,three-dots",
+            "rank": 1
+        },
+        "ABE": {
+            "caption": "🦸‍♀️ Spinner",
+            "editor": "Label",
+            "name": "info_content",
+            "rank": 0
+        },
+        "ABF": {
+            "caption": "🍭 Styling",
+            "editor": "Label",
+            "name": "info_styling",
+            "rank": 2
+        }
+    },
+    "icon": "ion-pizza",
+    "property_applications": {
+        "Background": false,
+        "Border": false,
+        "BoxShadow": false,
+        "Padding": false,
+        "resizable": true
+    }
+}
