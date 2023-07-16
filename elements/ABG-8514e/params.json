@@ -20,7 +20,7 @@
         },
         "ABA": {
             "caption": "Icon",
-            "default_val": "bug-ant",
+            "default_val": "spinner",
             "doc": "Which spinner to render.",
             "editor": "Dropdown",
             "in_style": false,

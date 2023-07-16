@@ -72,6 +72,25 @@
             "editor": "Label",
             "name": "info_styling",
             "rank": 5
+        },
+        "ABH": {
+            "caption": "Transition Duration",
+            "default_val": 0,
+            "doc": "Duration of the color transition in milliseconds.",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "transition_duration",
+            "rank": 7
+        },
+        "ABI": {
+            "caption": "Transition Easing",
+            "default_val": "Linear",
+            "doc": "What kind of easing function to use in the transition.",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "transition_easing",
+            "options": "Ease,Ease-In,Ease-Out,Ease-In-Out,Linear",
+            "rank": 8
         }
     },
     "icon": "ion-pizza",
