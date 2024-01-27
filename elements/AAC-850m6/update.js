@@ -14,13 +14,8 @@ function(instance, properties, context) {
 
   svg.setAttribute("fill", properties.color);
 
-  let transition_duration_s = properties.transition_duration ? properties.transition_duration / 1000 + 's' : '0s';
-
-  root.style.setProperty('--transition-duration', transition_duration_s);
-
-  let easing = properties.transition_easing ? properties.transition_easing.toLowerCase() : 'linear';
-  easing = easing.replace(' ', '-');
-  root.style.setProperty('--transition-easing', easing);
+  root.style.setProperty('--transition-duration', (properties.transition_duration ? properties.transition_duration / 1000 + 's' : '0s')); 
+  root.style.setProperty('--transition-easing', (properties.transition_easing || 'linear').toLowerCase().replace(' ', '-'));
 
   svg.classList.add("solid");
 

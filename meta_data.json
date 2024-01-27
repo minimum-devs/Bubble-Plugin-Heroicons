@@ -6,7 +6,7 @@
         "3": "internationalization"
     },
     "demo_page": "https://heroicons.bubbleapps.io/version-test",
-    "description": "Beautiful hand-crafted SVG icons by the makers of Tailwind CSS.\n\nThis plugin is a small wrapper that makes it easy & straightforward to use these fantastic icons in your bubble app!\n\n❗Demo available here 👉🏽 https://heroicons.bubbleapps.io/version-test\n\nView the editor 👉🏽 https://bubble.io/page?name=index&id=heroicons\n\nAdjust size and colors ✅\nSolid, Outline and Mini icon styles ✅\nChange background, borders and shadows ✅\nRespond to click events ✅\nWorks in bubble buttons ✅\nTooltips on hover ✅\n\nCheck out the heroicons website to find the full set of supported icons & what they looks like!",
+    "description": "Beautiful hand-crafted SVG icons by the makers of Tailwind CSS.\n\nThis plugin is a small wrapper that makes it easy & straightforward to use these fantastic icons in your bubble app!\n\n❗Demo available here 👉🏽 https://heroicons.bubbleapps.io/version-test\n\nView the editor 👉🏽 https://bubble.io/page?name=index&id=heroicons\n\nAdjust size and colors ✅\nSolid, Outline and Mini icon styles ✅\nChange background, borders and shadows ✅\nRespond to click events ✅\nWorks in bubble buttons ✅\nSupports color transitions ✅\nTooltips on hover ✅\n\nCheck out the heroicons website to find the full set of supported icons & what they looks like!",
     "image": "//s3.amazonaws.com/appforest_uf/f1622491076297x741941695009269200/heroicons.svg",
     "license": "open_source",
     "link": "https://forum.bubble.io/u/minimumstudio",

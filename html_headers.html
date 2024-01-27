@@ -1,29 +1,40 @@
-<script defer src="//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"></script>
+<script
+  defer
+  src="//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"
+></script>
 
 <script>
-  const allSelect = /\[(hi.*)\](.*)\[\/(hi.*)\]/;
-  const colormatch = /#[0-9A-f]{3,6}#/;
-  const fillMatcher = /fill="currentColor"/;
-  
+  const allSelect2 = /\[(hi.*)\](.*)\[\/(hi.*)\]/;
+  const colormatch2 = /#[0-9A-f]{3,6}#/;
+  const fillMatcher2 = /fill="currentColor"/;
+
   function replaceIcon(btn) {
     const btn_nodes = Array.from(btn.childNodes);
 
     if (!btn_nodes) return;
 
-    const text_node = btn_nodes.find((node) => node.nodeName === "#text");
+    const text_node = btn_nodes.find(
+      (node) => node.nodeName === "#text" && node.data.trim().length > 0
+    );
 
     if (!text_node) return;
 
     let content = text_node.data;
-    let iconColor = content.match(colormatch);
-    content = content.replace(colormatch, "");
 
-    const iconMarkup = content.match(allSelect);
+    let iconColor = content.match(colormatch2);
 
+    content = content.replace(colormatch2, "");
+
+    const iconMarkup = content.match(allSelect2);
     if (!iconMarkup) {
       if (btn.getAttribute("data-heroicon-last-text")) {
-        const current_text = Array.from(btn.childNodes).find((node) => node.nodeName === "#text");
-        if (current_text && (current_text.data !== btn.getAttribute("data-heroicon-last-text"))) {
+        const current_text = Array.from(btn.childNodes).find(
+          (node) => node.nodeName === "#text"
+        );
+        if (
+          current_text &&
+          current_text.data !== btn.getAttribute("data-heroicon-last-text")
+        ) {
           btn.setAttribute("data-heroicon-last-text", current_text.data);
           btn.childNodes.forEach((node) => {
             if (node.nodeName !== "#text") {
@@ -41,18 +52,23 @@
 
     const props = {
       name: iconMarkup[2],
-      size: '20px',
-      color: btn.innerHTML.match(colormatch) ? btn.innerHTML.match(colormatch)[0].slice(0, -1) : undefined,
+      size: "20px",
+      color: btn.innerHTML.match(colormatch2)
+        ? btn.innerHTML.match(colormatch2)[0].slice(0, -1)
+        : undefined,
       set: "mini",
       position: undefined,
       iconHTML: undefined,
       style: 'style="',
-      spacing: '8px',
-      stroke_width: '1.5px',
+      spacing: "0px",
+      stroke_width: "1.5px",
     };
 
     if (props.color) {
-      props.iconHTML = props.iconHTML.replace(fillMatcher, "fill=" + iconColor);
+      props.iconHTML = props.iconHTML.replace(
+        fillMatcher2,
+        "fill=" + iconColor
+      );
     }
 
     iconProps.forEach((property) => {
@@ -92,19 +108,20 @@
     if (window[`heroicons_${props.set}`].has(props.name)) {
       props.iconHTML = window[`heroicons_${props.set}`].get(props.name);
     } else {
-      console.log("Did not find applicable heroicon!");
       return;
     }
 
     btn.classList.add("heroicon");
 
-    props.style += ` ${props.set == 'outlined' ? ` stroke-width: ${props.stroke_width};` : ''} height: ${props.size}; width: ${props.size}; `;
+    props.style += ` ${
+      props.set == "outlined" ? ` stroke-width: ${props.stroke_width};` : ""
+    } height: ${props.size}; width: ${props.size}; `;
 
     let insertBefore = props.iconHTML.lastIndexOf("viewBox");
 
     btn.childNodes.forEach((node) => {
       if (node.nodeName === "#text") {
-        node.data = node.data.replace(allSelect, "");
+        node.data = node.data.replace(allSelect2, "");
         btn.setAttribute("data-heroicon-last-text", node.data);
       }
     });
@@ -131,14 +148,15 @@
       btn.insertAdjacentHTML("beforeend", styledHTML);
     } else {
       let styledHTML =
-        props.iconHTML.substring(0, insertBefore) + props.style + `"` + props.iconHTML.substring(insertBefore);
+        props.iconHTML.substring(0, insertBefore) +
+        props.style +
+        `"` +
+        props.iconHTML.substring(insertBefore);
       btn.insertAdjacentHTML("beforeend", styledHTML);
     }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    
-
     let config = {
       subtree: true,
       childList: true,
@@ -161,9 +179,11 @@
           mutation.target.parentElement &&
           mutation.target.parentElement.tagName === "BUTTON"
         ) {
-          replaceIcon(mutation.target.parentElement);          
+          replaceIcon(mutation.target.parentElement);
         }
-        Array.from(document.querySelectorAll("button")).forEach(btn => replaceIcon(btn));
+        Array.from(document.querySelectorAll("button")).forEach((btn) =>
+          replaceIcon(btn)
+        );
       }
     };
 
@@ -173,22 +193,22 @@
 </script>
 
 <style>
-  .animate-spin>circle {
+  .animate-spin > circle {
     color: inherit;
-    opacity: 25%
+    opacity: 25%;
   }
 
   .animate-spin {
-    animation: 1s linear infinite spin
+    animation: 1s linear infinite spin;
   }
 
   @keyframes spin {
     from {
-      transform: rotate(0)
+      transform: rotate(0);
     }
 
     to {
-      transform: rotate(360deg)
+      transform: rotate(360deg);
     }
   }
 
@@ -216,7 +236,6 @@
   }
 
   @keyframes dots {
-
     93.75%,
     100% {
       opacity: 0.2;
