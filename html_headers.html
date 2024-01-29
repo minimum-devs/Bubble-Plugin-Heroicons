@@ -1,7 +1,4 @@
-<script
-  defer
-  src="//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"
-></script>
+<script defer src="//meta.cdn.bubble.io/f1678588430465x230578802325048350/icons.js"></script>
 
 <script>
   const allSelect2 = /\[(hi.*)\](.*)\[\/(hi.*)\]/;
@@ -29,7 +26,7 @@
     if (!iconMarkup) {
       if (btn.getAttribute("data-heroicon-last-text")) {
         const current_text = Array.from(btn.childNodes).find(
-          (node) => node.nodeName === "#text"
+          (node) => node.nodeName === "#text" && node.data.trim().length > 0
         );
         if (
           current_text &&
@@ -38,6 +35,9 @@
           btn.setAttribute("data-heroicon-last-text", current_text.data);
           btn.childNodes.forEach((node) => {
             if (node.nodeName !== "#text") {
+              node.remove();
+            }
+            if (node.nodeName === "#text" && node.data.trim().length == 0) {
               node.remove();
             }
           });
@@ -60,7 +60,7 @@
       position: undefined,
       iconHTML: undefined,
       style: 'style="',
-      spacing: "0px",
+      spacing: "8px",
       stroke_width: "1.5px",
     };
 
@@ -113,14 +113,13 @@
 
     btn.classList.add("heroicon");
 
-    props.style += ` ${
-      props.set == "outlined" ? ` stroke-width: ${props.stroke_width};` : ""
-    } height: ${props.size}; width: ${props.size}; `;
+    props.style += ` ${props.set == "outlined" ? ` stroke-width: ${props.stroke_width};` : ""
+      } height: ${props.size}; width: ${props.size}; `;
 
     let insertBefore = props.iconHTML.lastIndexOf("viewBox");
 
     btn.childNodes.forEach((node) => {
-      if (node.nodeName === "#text") {
+      if (node.nodeName === "#text" && node.data.trim().length > 0) {
         node.data = node.data.replace(allSelect2, "");
         btn.setAttribute("data-heroicon-last-text", node.data);
       }
@@ -128,6 +127,9 @@
 
     btn.childNodes.forEach((node) => {
       if (node.nodeName !== "#text") {
+        node.remove();
+      }
+      if (node.nodeName === "#text" && node.data.trim().length == 0) {
         node.remove();
       }
     });
@@ -193,7 +195,7 @@
 </script>
 
 <style>
-  .animate-spin > circle {
+  .animate-spin>circle {
     color: inherit;
     opacity: 25%;
   }
@@ -213,10 +215,9 @@
   }
 
   .heroicon {
-    display: inline-flex;
-    vertical-align: middle;
-    justify-content: center;
-    align-items: center;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0 !important;
   }
 
   .dots_one {
@@ -236,6 +237,7 @@
   }
 
   @keyframes dots {
+
     93.75%,
     100% {
       opacity: 0.2;
