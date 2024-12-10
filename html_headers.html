@@ -6,43 +6,14 @@
   const fillMatcher2 = /fill="currentColor"/;
 
   function replaceIcon(btn) {
-    const btn_nodes = Array.from(btn.childNodes);
+    let content = btn.getAttribute("title");
 
-    if (!btn_nodes) return;
-
-    const text_node = btn_nodes.find(
-      (node) => node.nodeName === "#text" && node.data.trim().length > 0
-    );
-
-    if (!text_node) return;
-
-    let content = text_node.data;
+    if (!content) return;
 
     let iconColor = content.match(colormatch2);
-
     content = content.replace(colormatch2, "");
-
     const iconMarkup = content.match(allSelect2);
     if (!iconMarkup) {
-      if (btn.getAttribute("data-heroicon-last-text")) {
-        const current_text = Array.from(btn.childNodes).find(
-          (node) => node.nodeName === "#text" && node.data.trim().length > 0
-        );
-        if (
-          current_text &&
-          current_text.data !== btn.getAttribute("data-heroicon-last-text")
-        ) {
-          btn.setAttribute("data-heroicon-last-text", current_text.data);
-          btn.childNodes.forEach((node) => {
-            if (node.nodeName !== "#text") {
-              node.remove();
-            }
-            if (node.nodeName === "#text" && node.data.trim().length == 0) {
-              node.remove();
-            }
-          });
-        }
-      }
       return;
     }
 
@@ -95,7 +66,7 @@
       }
       if (/w[0-99]+/.test(property)) {
         const matched = property.match(/w([0-99]+)/);
-        props.stroke_width = `${matched[1]}px`;
+        props.stroke_width = `${matched[1]/10}px`;
       }
 
       const number = Number(property);
@@ -104,6 +75,19 @@
         props.size = String(number) + "px";
       }
     });
+
+    if (props.name == "no-icon") {
+      btn.classList.add("heroicon");
+
+      btn.setAttribute("title", btn.getAttribute("title").replace(allSelect2, "").replace(/\u00AD/g, ''));
+      btn.childNodes.forEach((node) => {
+        if (node.nodeName !== "#text") {
+          node.remove();
+        }
+
+      });
+      return;
+    }
 
     if (window[`heroicons_${props.set}`].has(props.name)) {
       props.iconHTML = window[`heroicons_${props.set}`].get(props.name);
@@ -118,21 +102,15 @@
 
     let insertBefore = props.iconHTML.lastIndexOf("viewBox");
 
-    btn.childNodes.forEach((node) => {
-      if (node.nodeName === "#text" && node.data.trim().length > 0) {
-        node.data = node.data.replace(allSelect2, "");
-        btn.setAttribute("data-heroicon-last-text", node.data);
-      }
-    });
-
+    btn.setAttribute("title", btn.getAttribute("title").replace(allSelect2, "").replace(/\u00AD/g, ''));
     btn.childNodes.forEach((node) => {
       if (node.nodeName !== "#text") {
         node.remove();
       }
-      if (node.nodeName === "#text" && node.data.trim().length == 0) {
-        node.remove();
-      }
     });
+
+    btn.style.display = "inline-flex";
+    btn.style.alignItems = "center";
 
     if (props.position == "left") {
       let styledHTML =
@@ -163,7 +141,8 @@
       subtree: true,
       childList: true,
       attributes: true,
-      characterData: true,
+      characterData: false,
+      attributeFilter: ["title"]
     };
 
     let callback = function (mutationsList, observer) {
@@ -176,16 +155,7 @@
               replaceIcon(node);
             }
           });
-        } else if (
-          mutation.target.nodeName === "#text" &&
-          mutation.target.parentElement &&
-          mutation.target.parentElement.tagName === "BUTTON"
-        ) {
-          replaceIcon(mutation.target.parentElement);
         }
-        Array.from(document.querySelectorAll("button")).forEach((btn) =>
-          replaceIcon(btn)
-        );
       }
     };
 
@@ -215,8 +185,9 @@
   }
 
   .heroicon {
-    display: inline-flex !important;
-    align-items: center !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 0 !important;
   }
 
